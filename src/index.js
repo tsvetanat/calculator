@@ -21,7 +21,6 @@ window.addEventListener("DOMContentLoaded",()=>{
       value2:"",
       operator: "",
       result:""
-  
   }
 
   function add (a, b) {
@@ -74,40 +73,51 @@ console.log(memoryValue)
         calc.result = "";
         isOperation = false;
        }
-
-       
-      
-      if (clickedButtonValue === "=")
+      else if (clickedButtonValue === "=")
       {
-       calc.result = compute (parseFloat(calc.value1), parseFloat(calc.value2), calc.operator);
+       calc.result = compute(parseFloat(calc.value1), parseFloat(calc.value2), calc.operator);
         display.value = calc.result;
-       
-      }
-
-      if (oper.includes(clickedButtonValue)) {
+        isOperation == false;
+        calc.operator="";
+        console.log("eqauls");
+        console.log(calc);
+      }  
+      else if (oper.includes(clickedButtonValue)&&calc.result=="") {
         calc.operator = clickedButtonValue;
         isOperation = true;
         display.value = calc.value1;
-      }
-      
-      if (/\d/.test(clickedButtonValue)){
+        console.log("operator");
+          console.log(calc);
+      } 
+      else if (oper.includes(clickedButtonValue))
+      { 
+          calc.operator = clickedButtonValue;
+          calc.value2 = "";
+          calc.value1 =calc.result;
+          display.value = calc.value1;
+          calc.result = "";
+          isOperation = true;
+          console.log("here");
+          console.log(calc);
+      } 
+      else if (/\d/.test(clickedButtonValue)){
 
         if(isOperation == false)
         {
           calc.value1 += parseFloat(clickedButtonValue);
           display.value = calc.value1;
-
+          console.log("value1");
+          console.log(calc);
         }
-
         else
         {
           calc.value2 += parseFloat(clickedButtonValue);
           display.value = calc.value2;
-         
-        }
+          console.log("value2");
+          console.log(calc);
+        } 
       }
-
-      if (clickedButtonValue == ".") {
+      else if (clickedButtonValue == ".") {
         if(isOperation == false)
         {
           calc.value1 += ".";
@@ -120,15 +130,14 @@ console.log(memoryValue)
         }     
     }
       
- 
-      if (clickedButtonValue === "m+"|| clickedButtonValue === "m-") {
+    else if (clickedButtonValue === "m+"|| clickedButtonValue === "m-") {
         
         memoryValue = parseFloat(display.value);
         display.value = c;
         currentValue = display.value;
         display1.style.textAlign = "left";
 
-       }
+      }
        
 
        if (clickedButtonValue === "mrc") {
@@ -138,7 +147,7 @@ console.log(memoryValue)
         display.value = temp;
         display1.style.textAlign = "right";
         
-        }
+      }
         
         else if (display.value !== currentValue) {
         display.value  = "";
@@ -149,7 +158,7 @@ console.log(memoryValue)
         isOperation = false;
        }
 
-        }
+      }
       
     })
   })
